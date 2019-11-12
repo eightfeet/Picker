@@ -49,7 +49,7 @@ class Picker {
 		// 重新定义数据关联结构
 		this.keyMap = config.keyMap
 			? config.keyMap
-			: { name: 'name', value: 'value', childs: 'childs' };
+			: { display: 'display', value: 'value', childs: 'childs' };
 		
 		// 定义触发node
 		this.trigger = document.querySelector(trigger);
@@ -313,11 +313,11 @@ class Picker {
 
 	generateArrData = targetArr => {
 		let tempArr = [];
-		let keyMap_id = this.keyMap.name;
+		let keyMap_id = this.keyMap.display;
 		let keyMap_value = this.keyMap.value;
 		for (let i = 0; i < targetArr.length; i++) {
 			let tempObj = {};
-			tempObj[keyMap_id] = targetArr[i][this.keyMap.name];
+			tempObj[keyMap_id] = targetArr[i][this.keyMap.display];
 			tempObj[keyMap_value] = targetArr[i][this.keyMap.value];
 			tempArr.push(tempObj);
 		}
@@ -441,8 +441,8 @@ class Picker {
 				for (let j = 0; j < this.displayJson[i].length; j++) {
 					//行
 					tempHTML += `<li  ${tempPosition.length > 0 && tempPosition[i] === j ? `class="${this.id}_activated"` : ''} data-id="${
-						this.displayJson[i][j][this.keyMap.name]
-					}">${this.displayJson[i][j][this.keyMap.value]}</li>`;
+						this.displayJson[i][j][this.keyMap.value]
+					}">${this.displayJson[i][j][this.keyMap.display]}</li>`;
 				}
 				this.slider[i].innerHTML = tempHTML;
 			} else {
@@ -452,8 +452,8 @@ class Picker {
 				for (let j = 0; j < this.displayJson[i].length; j++) {
 					//行
 					tempHTML += `<li ${tempPosition.length > 0 && tempPosition[i] === j ? `class="${this.id}_activated"` : ''} data-id="${
-						this.displayJson[i][j][this.keyMap.name]
-					}">${this.displayJson[i][j][this.keyMap.value]}</li>`;
+						this.displayJson[i][j][this.keyMap.value]
+					}">${this.displayJson[i][j][this.keyMap.display]}</li>`;
 				}
 				tempHTML += '</ul>';
 				tempWheel.innerHTML = tempHTML;
@@ -500,8 +500,8 @@ class Picker {
 		} else if (this.jsonType) {
 			for (let j = 0; j < data.length; j++) {
 				tempHTML +=
-					`<li data-id="${data[j][this.keyMap.name]}">
-					${data[j][this.keyMap.value]}
+					`<li data-id="${data[j][this.keyMap.value]}">
+					${data[j][this.keyMap.display]}
 					</li>`;
 			}
 			this.wheelsData[sliderIndex] = { data };

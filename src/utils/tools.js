@@ -96,7 +96,7 @@ export function getPositionByDefaultValue(defaultval, data, keyMap, jsonType, ca
 		Object.prototype.toString.call(data[0]) !== '[object Object]'
 	) {
 		console.error(
-			'Parameter error and see more details at https://www.chromestatus.com/feature/5088147346030592'
+			'Parameter error and see more details at https://github.com/eightfeet/Picker/blob/master/readme.MD#wheelsdata'
 		);
 		return position;
 	}
@@ -109,7 +109,7 @@ export function getPositionByDefaultValue(defaultval, data, keyMap, jsonType, ca
 				if (deepth >= defaultval.length) {
 					return;
 				}
-				if (defaultval[deepth] === element[keyMap.name]) {
+				if (defaultval[deepth] === element[keyMap.value]) {
 					position.push(index);
 					deepth++;
 					if (Array.isArray(element[keyMap.childs]) && element[keyMap.childs].length > 0) {
@@ -123,7 +123,7 @@ export function getPositionByDefaultValue(defaultval, data, keyMap, jsonType, ca
 		for (let index = 0; index < defaultval.length; index++) {
 			const element = defaultval[index];
 			data[index].data.forEach((item, index) => {
-				if (element === item[keyMap.name]) {
+				if (element === item[keyMap.value]) {
 					position.push(index);
 				}
 			});

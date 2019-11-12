@@ -190,7 +190,7 @@
         title: '请选择省市区', // 设置标题
         defaultValue: ['15', '1513', '151315'], // 默认选择的地址
         wheels: [{ data: regions }], // 原始数据
-        keyMap: { name: 'id', value: 'value', childs: 'childs' },
+        keyMap: { display: 'value', value: 'id', childs: 'childs' },
         onConfirm: function (data) {
             handleResult(data, '#addresspicker', 'value', '请选择地址')
         },
@@ -254,7 +254,7 @@
             { data: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'] }
         ],
         trigger: '#picker',
-        keyMap: { name: 'val', value: 'date', childs: 'childs' },
+        keyMap: { display: 'val', value: 'date', childs: 'childs' },
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
         triggerDisplayData: true,
@@ -312,7 +312,7 @@
             }
         ],
         trigger: '#pickerjsontype',
-        keyMap: { name: 'val', value: 'date', childs: 'childs' },
+        keyMap: { display: 'date', value: 'val', childs: 'childs' },
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
         triggerDisplayData: true,
@@ -349,11 +349,13 @@
         }
     });
 
+    console.log('msData', msData);
+
     window.cascadeSelect = new Picker({
         id: 'cascadeSelect',
         wheels: msData,
         trigger: '#pickercascade',
-        keyMap: { name: 'val', value: 'date', childs: 'childs' },
+        keyMap: { display: 'date', value: 'val', childs: 'childs' },
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
         triggerDisplayData: true,
