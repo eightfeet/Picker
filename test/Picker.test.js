@@ -8,15 +8,16 @@ import {installMouseHelper} from './install-mouse-helper';
 */
 describe('Picker', () => {
 	// end2end测试
-	it('picker end2end test', async () => {
+	it('demo UI test', async () => {
 		const browser = await puppeteer.launch({
 			headless: false,
-			args: ['--window-size=800,800']
+			args: ['--window-size=800,720']
 		});
 		const page = await browser.newPage();
 		await installMouseHelper(page);
 		await page.goto('http://localhost:9000/');
-
+		
+		
 		// picker的trigger ‘div#picker’被点击时，显示值为“周日 08:00”，由回调方法onShow改变所选值
 		await page.click('div#picker');
 		let onShowText = await page.$eval('#picker', el => el.outerText);
@@ -50,22 +51,88 @@ describe('Picker', () => {
 		const titleText = await page.$eval('.pickerSelect_title', el => el.outerText);
 		expect(titleText).toBe('demo');
 		await page.waitFor(1000);
-
+		// return;
 		// 点击交互
-		await page.evaluate(() => document.getElementsByClassName('pickerSelect_selectcontainer')[0].children[1].setAttribute('id', 'wheelsposition2'));
+		// 周二
+		await page.evaluate(() => document.getElementsByClassName('pickerSelect_selectcontainer')[0].children[1].setAttribute('id', 'wheelspositionW1'));
+		// 周三
+		await page.evaluate(() => document.getElementsByClassName('pickerSelect_selectcontainer')[0].children[2].setAttribute('id', 'wheelspositionW2'));
+		// 11:00
+		await page.evaluate(() => document.getElementsByClassName('pickerSelect_selectcontainer')[1].children[3].setAttribute('id', 'wheelspositionT11'));
+		// 12:00
+		await page.evaluate(() => document.getElementsByClassName('pickerSelect_selectcontainer')[1].children[4].setAttribute('id', 'wheelspositionT12'));
 		
 		// 点击二月检查滚动是否正常
-		await page.click('#wheelsposition2');
+		await page.click('#wheelspositionW1');
 		const wheelsPosition2 = await page.$eval('.pickerSelect_selectcontainer', el => el.getAttribute('style'));
 		expect(wheelsPosition2.indexOf('40px') !== -1).toBe(true);
 		await page.waitFor(1000);
 
-		// 验证点击确定后取之正常
+		// 验证点击取消后各值正常
 		await page.click('.pickerSelect_cancel');
-		const closeText = await page.$eval('#picker', el => el.outerText);
-		expect(closeText).toBe('normal');
-		page.close();
-		
-	}, 5000);
-});
+		const resultText = await page.$eval('#picker', el => el.outerText);
+		expect(resultText).toBe('normal');
+		await page.waitFor(2000);
 
+		await page.click('div#picker');
+		await page.waitFor(2000);
+
+		await page.click('#wheelspositionW2');
+		// 验证点击确定后各值正常
+		await page.click('.pickerSelect_confirm');
+		const pickerText = await page.$eval('div#picker', el => el.outerText);
+		expect(pickerText).toBe('周二 08:00');
+		// 11:00
+
+		await page.waitFor(2000);
+		await page.close();
+		browser.close();
+	}, 30000);
+
+	it('demo-jsontype UI test', async () => {
+		const browser = await puppeteer.launch({
+			headless: false,
+			args: ['--window-size=800,720']
+		});
+		const page = await browser.newPage();
+		await installMouseHelper(page);
+		await page.goto('http://localhost:9000/');
+		await page.evaluate(() => document.getElementsByClassName('mobileId_selectcontainer')[1].children[1].setAttribute('id', 'wheelsMobileIdPositionT9'));
+
+		await page.click('#pickerjsontype');
+		await page.waitFor(1000);
+		await page.click('#wheelsMobileIdPositionT9');
+		await page.waitFor(1000);
+		const pickerText = await page.$eval('div#pickerjsontype', el => el.outerText);
+		expect(pickerText).toBe('周日 09:00');
+		await page.waitFor(2000);
+		await page.close();
+		browser.close();
+	}, 20000);
+
+	it('CascadeSelect UI test', async () => {
+		const browser = await puppeteer.launch({
+			headless: false,
+			args: ['--window-size=800,720']
+		});
+		const page = await browser.newPage();
+		await installMouseHelper(page);
+		await page.goto('http://localhost:9000/');
+		
+
+		await page.click('#pickercascade');
+		await page.waitFor(500);
+		await page.evaluate(() => window.cascadeSelect.updatePicker([2,2,1,5]));
+		await page.waitFor(500);
+		await page.evaluate(() => document.querySelector('#cascadeSelect').getElementsByTagName('ul')[1].children[0].setAttribute('id', 'cascadeSelecttest'));
+		
+		await page.waitFor(1000);
+		await page.click('#cascadeSelecttest');
+		await page.waitFor(1000);
+		const pickerText = await page.$eval('div#pickercascade', el => el.outerText);
+		expect(pickerText).toBe('2月 1日 0时 0分');
+		await page.waitFor(2000);
+		await page.close();
+		browser.close();
+	}, 20000);
+});
