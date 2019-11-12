@@ -10,7 +10,7 @@ describe('Picker', () => {
 	// end2end测试
 	it('demo UI test', async () => {
 		const browser = await puppeteer.launch({
-			headless: false,
+			headless: true,
 			args: ['--window-size=800,720']
 		});
 		const page = await browser.newPage();
@@ -91,7 +91,7 @@ describe('Picker', () => {
 
 	it('demo-jsontype UI test', async () => {
 		const browser = await puppeteer.launch({
-			headless: false,
+			headless: true,
 			args: ['--window-size=800,720']
 		});
 		const page = await browser.newPage();
@@ -112,7 +112,7 @@ describe('Picker', () => {
 
 	it('CascadeSelect UI test', async () => {
 		const browser = await puppeteer.launch({
-			headless: false,
+			headless: true,
 			args: ['--window-size=800,720']
 		});
 		const page = await browser.newPage();
