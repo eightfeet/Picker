@@ -1,0 +1,71 @@
+{
+  "name": "@eightfeet/picker",
+  "version": "2.0.0",
+  "description": "",
+  "main": "./dist/picker.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --inline --hot",
+    "prepublish": "rm -rf ./dist && yarn build",
+    "test": "jest --watchAll"
+  },
+  "keywords": [
+    "modal"
+  ],
+  "author": "eightfeet",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eightfeet/Modal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eightfeet/Modal/issues"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/runtime": "^7.6.3",
+    "autoprefixer": "^9.7.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "caniuse-api": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.6.0",
+    "eslint-loader": "^3.0.2",
+    "eslint-plugin-jest": "^23.0.2",
+    "file-loader": "^4.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "node-sass": "^4.13.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "puppeteer": "^2.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "url-loader": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "autoprefix": "^1.0.1",
+    "inline-style-prefixer": "^5.1.0",
+    "jss-camel-case": "^6.1.0",
+    "node-sass-utils": "^1.1.2"
+  },
+  "browserslist": [
+    "Android 2.3",
+    "Android >= 4",
+    "Chrome >= 29",
+    "iOS >= 6",
+    "Safari >= 7.1"
+  ]
+}

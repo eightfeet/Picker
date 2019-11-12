@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://by-health-cdn.oss-cn-beijing.aliyuncs.com/region/regions.js"></script>
+    <title>AddressPicker</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap {
+            padding: 10px;
+        }
+
+        #addresspicker {
+            line-height: 40px;
+            background-color: rgb(20, 159, 64);
+            width: 260px;
+            margin: 30px auto 10px auto;
+            color: #fff;
+            border-radius: 0.2em;
+            text-align: center;
+        }
+
+        #picker {
+            line-height: 40px;
+            background-color: rgb(159, 83, 165);
+            width: 260px;
+            margin: 30px auto 10px auto;
+            color: #fff;
+            border-radius: 0.2em;
+            text-align: center;
+        }
+
+        #pickerjsontype {
+            line-height: 40px;
+            background-color: rgb(20, 150, 159);
+            width: 260px;
+            margin: 30px auto 10px auto;
+            color: #fff;
+            border-radius: 0.2em;
+            text-align: center;
+        }
+
+        #pickercascade {
+            line-height: 40px;
+            background-color: rgb(100, 100, 100);
+            width: 260px;
+            margin: 30px auto 10px auto;
+            color: #fff;
+            border-radius: 0.2em;
+            text-align: center;
+        }
+
+        #uitest {
+            display: none;
+        }
+
+        .cascadeSelect_activated {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="picker">demo</div>
+        <div id="pickerjsontype">demo-jsontype</div>
+        <div id="pickercascade">demo-cascade 联动</div>
+        <div id="addresspicker">地址选择</div>
+        <br />
+        <div style="text-align: center"><a
+                href="https://github.com/eightfeet/AddressPicker/blob/master/README.md">Documents</a></div>
+        <ul id="uitest">
+            <li id="onConfirm"></li>
+            <li id="onCancel"></li>
+            <li id="transitionEnd"></li>
+            <li id="onShow"></li>
+            <li id="onHide"></li>
+        </ul>
+    </div>
+    <div id="xxxxxxxxx"></div>
+</body>
+<script>
+    //=================================================//
+    //-----------------------tools---------------------//
+    //=================================================//
+    function formatWheelsData(data) {
+        var provinces = [];
+        var cities = [];
+        var counties = [];
+
+        for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+                var items = data[key];
+                for (var el in items) {
+                    if (items.hasOwnProperty(el)) {
+                        var element = items[el];
+                        if (el.length === 2) {
+                            provinces.push({
+                                id: el,
+                                value: element,
+                                childs: []
+                            });
+                        }
+                        if (el.length === 4) {
+                            cities.push({
+                                id: el,
+                                value: element,
+                                childs: []
+                            });
+                        }
+                        if (el.length === 6) {
+                            counties.push({
+                                id: el,
+                                value: element
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        for (var indexP = 0; indexP < provinces.length; indexP++) {
+            var elementP = provinces[indexP];
+            var elementPChild = elementP.childs;
+            for (var indexCi = 0; indexCi < cities.length; indexCi++) {
+                var elementCi = cities[indexCi];
+                var elementCiChild = elementCi.childs;
+                if (elementP.id === elementCi.id.slice(0, 2)) {
+                    elementPChild.push(elementCi);
+                    for (var indexC = 0; indexC < counties.length; indexC++) {
+                        var elementC = counties[indexC];
+                        if (elementCi.id === elementC.id.slice(0, 4)) {
+                            elementCiChild.push(elementC);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return provinces;
+    }
+
+    var Picker = ___Picker___;
+
+    var regions = formatWheelsData(window.BY_HEALTH_REGIONS);
+
+    const defaultData = ['15', '1513', '151315'];
+
+    function handleResult(data, element, key, defaultText) {
+        var result = [];
+        for (let index = 0; index < data.length; index++) {
+            const item = data[index];
+            if (item && typeof item === 'object') {
+                result.push(item[key])
+            }
+            if (item && typeof item === 'string') {
+                result.push(item)
+            }
+        }
+        var text = result.join(' ');
+
+        if (text.length > 0) {
+            document.querySelector(element).innerText = result.join(' ');
+        } else {
+            document.querySelector(element).innerText = defaultText;
+        }
+    }
+
+    window.newPicker = new Picker({
+        id: 'address',
+        parentId: 'xxxxxxxxx',
+        // emBase: 20,
+        trigger: '#addresspicker', // 触发Dom
+        title: '请选择省市区', // 设置标题
+        defaultValue: ['15', '1513', '151315'], // 默认选择的地址
+        wheels: [{ data: regions }], // 原始数据
+        keyMap: { name: 'id', value: 'value', childs: 'childs' },
+        onConfirm: function (data) {
+            handleResult(data, '#addresspicker', 'value', '请选择地址')
+        },
+        onCancel: function (data) {
+            handleResult(data, '#addresspicker', 'value', '请选择地址')
+        },
+        transitionEnd: function (data) {
+            console.log(data);
+        },
+        onShow: function (e) {
+            handleResult(e.getCurValue(), '#addresspicker', 'value', '请选择地址');
+        },
+        onHide: function (e) {
+            console.log(e);
+        },
+        onChange: function (data) {
+            handleResult(data, '#addresspicker', 'value', '请选择地址')
+        },
+        // 控制样式
+        style: {
+        }
+    });
+
+    function getDaysInOneMonth(year, month) {
+        month = parseInt(month, 10);
+        let d = new Date(year, month, 0);
+        return d.getDate();
+    }
+
+    function getYearDate(year) {
+        const data = [];
+        const M = {};
+        M.data = [];
+        for (let yi = 1; yi < 13; yi++) {
+            const temp = { date: `${yi}月`, val: yi, childs: [] };
+            const days = getDaysInOneMonth(year, yi);
+            for (let di = 1; di <= days; di++) {
+                const mdays = { date: `${di}日`, val: di, childs: [] };
+                for (let hi = 0; hi < 24; hi++) {
+                    const hdata = { date: `${hi}时`, val: hi, childs: [] };
+                    for (let mi = 0; mi < 12; mi++) {
+                        hdata.childs.push({ date: `${mi * 5}分`, val: (mi * 5) });
+                    }
+                    mdays.childs.push(hdata);
+                }
+                temp.childs.push(mdays);
+            }
+            M.data.push(temp);
+        }
+        data.push(M);
+        return data;
+    }
+
+
+    var msData = getYearDate(2019);
+
+    window.picker = new Picker({
+        id: 'pickerSelect',
+        wheels: [
+            { data: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'] },
+            { data: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'] }
+        ],
+        trigger: '#picker',
+        keyMap: { name: 'val', value: 'date', childs: 'childs' },
+        cancelBtnText: 'cancel',
+        confirmBtnText: 'ensure',
+        triggerDisplayData: true,
+        onConfirm: function (data) {
+            handleResult(data, '#picker', null, 'normal')
+        },
+        onCancel: function (data) {
+            handleResult(data, '#picker', null, 'normal')
+        },
+        transitionEnd: function (data) {
+            handleResult(data, '#picker', null, 'normal')
+        },
+        onShow: function (e) {
+            console.log(e);
+            handleResult(e.getCurValue(), '#picker', null, 'normal')
+        },
+        onHide: function (e) {
+            console.log(e);
+        },
+        onChange: function (data) {
+            handleResult(data, '#picker', null, 'normal')
+        },
+        title: 'demo',
+        style: {
+            panel: {
+                backgroundColor: '#aaa'
+            }
+        }
+    });
+
+    window.jsonSelect = new Picker({
+        id: 'mobileId',
+        wheels: [
+            {
+                data: [
+                    { val: 0, date: '周日' },
+                    { val: 1, date: '周一' },
+                    { val: 2, date: '周二' },
+                    { val: 3, date: '周三' },
+                    { val: 4, date: '周四' },
+                    { val: 5, date: '周五' },
+                    { val: 6, date: '周六' }
+                ]
+            },
+            {
+                data: [
+                    { val: 8, date: '08:00' },
+                    { val: 9, date: '09:00' },
+                    { val: 10, date: '10:00' },
+                    { val: 11, date: '11:00' },
+                    { val: 12, date: '12:00' },
+                    { val: 13, date: '13:00' },
+                    { val: 14, date: '14:00' }
+                ]
+            }
+        ],
+        trigger: '#pickerjsontype',
+        keyMap: { name: 'val', value: 'date', childs: 'childs' },
+        cancelBtnText: 'cancel',
+        confirmBtnText: 'ensure',
+        triggerDisplayData: true,
+        onConfirm: function (data) {
+            console.log(data);
+            handleResult(data, '#pickerjsontype', 'date', 'pickerjsontype')
+        },
+        onCancel: function (data) {
+            console.log(data);
+            handleResult(data, '#pickerjsontype', 'date', 'pickerjsontype')
+        },
+        transitionEnd: function (data) {
+            console.log(data);
+            handleResult(data, '#pickerjsontype', 'date', 'pickerjsontype')
+        },
+        onShow: function (e) {
+            handleResult(e.getCurValue(), '#pickerjsontype', 'date', 'pickerjsontype');
+        },
+        onHide: function (e) {
+            console.log(e);
+        },
+        onChange: function (data) {
+            console.log(data);
+            handleResult(data, '#pickerjsontype', 'date', 'pickerjsontype')
+        },
+        title: 'json类型',
+        style: {
+            wrap: {
+                color: '#444'
+            },
+            mask: {
+                height: '50em'
+            }
+        }
+    });
+
+    window.cascadeSelect = new Picker({
+        id: 'cascadeSelect',
+        wheels: msData,
+        trigger: '#pickercascade',
+        keyMap: { name: 'val', value: 'date', childs: 'childs' },
+        cancelBtnText: 'cancel',
+        confirmBtnText: 'ensure',
+        triggerDisplayData: true,
+        onConfirm: function (data) {
+            console.log(data);
+            handleResult(data, '#pickercascade', 'date', '联动选择')
+        },
+        onCancel: function (data) {
+            console.log(data);
+            handleResult(data, '#pickercascade', 'date', '联动选择')
+        },
+        transitionEnd: function (data) {
+            console.log(data);
+            handleResult(data, '#pickercascade', 'date', '联动选择')
+        },
+        onShow: function (e) {
+            handleResult(e.getCurValue(), '#pickercascade', 'date', '联动选择');
+        },
+        onHide: function (e) {
+            console.log(e);
+        },
+        onChange: function (data) {
+            console.log(data);
+            handleResult(data, '#pickercascade', 'date', '联动选择')
+        },
+        title: '多级联动',
+        style: {
+            wrap: {
+                color: '#444'
+            },
+            mask: {
+                height: '50em'
+            }
+        }
+    });
+
+</script>
+
+</html>
