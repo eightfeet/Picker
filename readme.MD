@@ -3,6 +3,7 @@
 ```sh
 npm install @eightfeet/picker
 ```
+### <a href="http://www.eightfeet.cn/Picker/dist/index.html">Demo</a>
 
 ### Usage
 
