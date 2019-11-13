@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="./picker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <!-- app -->
+    <div id="app">
+        <button id="pickerSelect">{{ result }}</button>
+    </div>
+
+    <script>
+        // start app
+        new Vue({
+            el: '#app',
+            data: {
+                showModal: false,
+                picker: {},
+                result: '请选择'
+            },
+            methods: {
+                updatePicker: function (data) {
+                    this.result = data.join(' ');
+                }
+            },
+            mounted: function () {
+                this.$nextTick(function () {
+                    var _this = this;
+                    this.picker = new window.___Picker___({
+                        id: 'picker',
+                        wheels: [
+                            { data: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'] },
+                            { data: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'] }
+                        ],
+                        trigger: '#pickerSelect',
+                        onConfirm: function (data) {
+                            _this.updatePicker(data)
+                        },
+                        title: 'demo'
+                    })
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

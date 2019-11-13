@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv="X-UA-Compatible" content="ie=edge"><script src="http://by-health-cdn.oss-cn-beijing.aliyuncs.com/region/regions.js"></script><title>Picker</title><style>body,html{width:100%;height:100%;margin:0;padding:0}h3{margin:0;padding:0}#wrap{padding:10px}#addresspicker{line-height:40px;background-color:#149f40;width:260px;margin:30px auto 10px auto;color:#fff;border-radius:.2em;text-align:center}#picker{line-height:40px;background-color:#9f53a5;width:260px;margin:30px auto 10px auto;color:#fff;border-radius:.2em;text-align:center}#pickerjsontype{line-height:40px;background-color:#14969f;width:260px;margin:30px auto 10px auto;color:#fff;border-radius:.2em;text-align:center}#pickercascade{line-height:40px;background-color:#646464;width:260px;margin:30px auto 10px auto;color:#fff;border-radius:.2em;text-align:center}#uitest{display:none}.cascadeSelect_activated{color:red}</style></head><body><div id="wrap"><div id="picker">demo</div><div id="pickerjsontype">demo-jsontype</div><div id="pickercascade">demo-cascade 联动</div><div id="addresspicker">地址选择</div><br><div style="text-align:center"><a href="https://github.com/eightfeet/AddressPicker/blob/master/README.md">Documents</a></div><ul id="uitest"><li id="onConfirm"></li><li id="onCancel"></li><li id="transitionEnd"></li><li id="onShow"></li><li id="onHide"></li></ul></div><div id="xxxxxxxxx"></div><script type="text/javascript" src="./picker.js?39a3a296be65bf55395c"></script></body><script>//=================================================//
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv="X-UA-Compatible" content="ie=edge"><script src="http://by-health-cdn.oss-cn-beijing.aliyuncs.com/region/regions.js"></script><title>Picker</title><style>body,html{width:100%;height:100%;margin:0;padding:0}h3{margin:0;padding:0}#wrap{padding:10px}#addresspicker{line-height:40px;background-color:#149f40;width:260px;margin:30px auto 10px auto;color:#fff;border-radius:.2em;text-align:center}#picker{line-height:40px;background-color:#9f53a5;width:260px;margin:30px auto 10px auto;color:#fff;border-radius:.2em;text-align:center}#pickerjsontype{line-height:40px;background-color:#14969f;width:260px;margin:30px auto 10px auto;color:#fff;border-radius:.2em;text-align:center}#pickercascade{line-height:40px;background-color:#646464;width:260px;margin:30px auto 10px auto;color:#fff;border-radius:.2em;text-align:center}#uitest{display:none}.cascadeSelect_activated{color:red}</style></head><body><div id="wrap"><div id="picker">demo</div><div id="pickerjsontype">demo-jsontype</div><div id="pickercascade">demo-cascade 联动</div><div id="addresspicker">地址选择</div><br><div style="text-align:center"><a href="https://github.com/eightfeet/Picker/blob/master/readme.MD">Documents</a></div><ul id="uitest"><li id="onConfirm"></li><li id="onCancel"></li><li id="transitionEnd"></li><li id="onShow"></li><li id="onHide"></li></ul></div><div id="xxxxxxxxx"></div><script type="text/javascript" src="./picker.js?f45893acb6df0c1acd7a"></script></body><script>//=================================================//
     //-----------------------tools---------------------//
     //=================================================//
     function formatWheelsData(data) {
@@ -157,10 +157,8 @@
             { data: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'] }
         ],
         trigger: '#picker',
-        keyMap: { display: 'val', value: 'date', childs: 'childs' },
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
-        triggerDisplayData: true,
         onConfirm: function (data) {
             handleResult(data, '#picker', null, 'normal')
         },
@@ -218,7 +216,6 @@
         keyMap: { display: 'date', value: 'val'},
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
-        triggerDisplayData: true,
         onConfirm: function (data) {
             console.log(data);
             handleResult(data, '#pickerjsontype', 'date', 'pickerjsontype')
@@ -261,7 +258,6 @@
         keyMap: { display: 'date', value: 'val', childs: 'childs' },
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
-        triggerDisplayData: true,
         onConfirm: function (data) {
             console.log(data);
             handleResult(data, '#pickercascade', 'date', '联动选择')

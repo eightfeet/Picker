@@ -1,6 +1,6 @@
 {
   "name": "@eightfeet/picker",
-  "version": "2.0.0",
+  "version": "1.0.3",
   "description": "",
   "main": "./dist/picker.js",
   "files": [
@@ -13,16 +13,18 @@
     "test": "jest --watchAll"
   },
   "keywords": [
-    "modal"
+    "Picker",
+    "MobilePicker",
+    "MobileSelecter"
   ],
   "author": "eightfeet",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eightfeet/Modal.git"
+    "url": "https://github.com/eightfeet/Picker"
   },
   "bugs": {
-    "url": "https://github.com/eightfeet/Modal/issues"
+    "url": "https://github.com/eightfeet/Picker/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",

@@ -84,7 +84,7 @@
         <div id="addresspicker">地址选择</div>
         <br />
         <div style="text-align: center"><a
-                href="https://github.com/eightfeet/AddressPicker/blob/master/README.md">Documents</a></div>
+                href="https://github.com/eightfeet/Picker/blob/master/readme.MD">Documents</a></div>
         <ul id="uitest">
             <li id="onConfirm"></li>
             <li id="onCancel"></li>
@@ -255,10 +255,8 @@
             { data: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'] }
         ],
         trigger: '#picker',
-        keyMap: { display: 'val', value: 'date', childs: 'childs' },
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
-        triggerDisplayData: true,
         onConfirm: function (data) {
             handleResult(data, '#picker', null, 'normal')
         },
@@ -316,7 +314,6 @@
         keyMap: { display: 'date', value: 'val'},
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
-        triggerDisplayData: true,
         onConfirm: function (data) {
             console.log(data);
             handleResult(data, '#pickerjsontype', 'date', 'pickerjsontype')
@@ -359,7 +356,6 @@
         keyMap: { display: 'date', value: 'val', childs: 'childs' },
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
-        triggerDisplayData: true,
         onConfirm: function (data) {
             console.log(data);
             handleResult(data, '#pickercascade', 'date', '联动选择')

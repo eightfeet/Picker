@@ -3,13 +3,16 @@
 ```sh
 npm install @eightfeet/picker
 ```
+> 也可以通过```<scrip src="yourpath/picker.js"></scrip>```来安装Picker，window下会创建一个属性名为\_\_\_Picker\_\_\_的构造方法；
+
+### <a href="http://www.eightfeet.cn/Picker/dist/index.html">Demo</a>
 
 ### Usage
 
 ```javascript
-import { MobileSelect } from @eightfeet/picker;
+import Picker from @eightfeet/picker;
 
-const datePicker = new MobileSelect({
+const datePicker = new Picker({
         id: 'datePicker',
         wheels: [
             {data:['周日','周一','周二','周三','周四','周五','周六']},
@@ -17,12 +20,14 @@ const datePicker = new MobileSelect({
         ],
         trigger: '#datepicker',
         onConfirm: function (data) {
-            handleResult(data, '#mobileselect', null, 'mobileselectStringtype')
+            console.log(data);
         }
     });
 
 datePicker.showPicker(['周二', '10：00']);
 ```
+
+[在React中使用](http://www.eightfeet.cn/Picker/src/example/react.html)，[在Vue中使用](http://www.eightfeet.cn/Picker/src/example/vue.html)
 
 
 
@@ -30,15 +35,15 @@ datePicker.showPicker(['周二', '10：00']);
 
 | 参数          | 类型     | 说明                                                         | 是否必填 |
 | ------------- | -------- | ------------------------------------------------------------ | -------- |
-| id            | String   | 模块ID，模块根节点将以此为id，部分子节点将添加class=“id_功能名” 作为className用于覆写样式（能通过style参数设置样式的尽量不要通过className去覆写），默认id=MobileSelect_时间戳_100位随机数 | 否       |
+| id            | String   | 模块ID，模块根节点将以此为id，部分子节点将添加class=“id\_功能名” 作为className用于覆写样式（能通过style参数设置样式的尽量不要通过className去覆写），默认id=MobileSelect_时间戳_100位随机数 | 否       |
 | parentId      | String   | 模块挂载的父节点，                                           | 否       |
 | emBase        | Number   | 基础字体大小，模块采用em为单位制，子节点元素单位em的参考值，比如｛emBase:20｝则相当于1em=20px | 否       |
 | trigger       | String   | 引用picker页面的目标触发node，用于点击以唤起picker           | 必填     |
 | title         | String   | 设置picker的标题                                             | 否       |
-| wheels        | Object   | picker的原始数据，这里控制picker选择器的类型,见wheels附表    | 必填     |
-| keyMap        | Object   | 当wheels为 “联动数据结构” 或者 “{ key: value }数据结构” 时用来定义picker显示的数据结构（具体参照wheels附表） | 否       |
+| wheels        | Object   | picker的原始数据，这里控制picker选择器的类型,<a href="#wheelstag">见wheels数据结构</a> | 必填     |
+| keyMap        | Object   | 当wheels为 “联动数据结构” 或者 “{ key: value }数据结构” 时用来定义picker显示的数据结构（具体参照wheels数据结构） | 否       |
 | defaultValue  | Array    | 创建picker初始化时默认选择的值，请使用keyMap中valve对应定义的key的值 | 否       |
-| style         | Object   | 控制picker的样式，见style附表                                |          |
+| style         | Object   | 控制picker的样式，<a href="#styletag">见style附表</a>        |          |
 | onConfirm     | Function | 点击确认时的回调，以参数形式返回被选中的结果                 | 否       |
 | onCancel      | Function | 点击取消或者遮罩层时的回调，以参数形式返回上次选中的结果     | 否       |
 | transitionEnd | Function | 滚动结束时的回调，以参数形式返回被选中的结果                 | 否       |
@@ -50,25 +55,37 @@ datePicker.showPicker(['周二', '10：00']);
 
 ### options
 
-#### picker.updatePicker(value)
+#### new Picker().updatePicker(value)
 
 用于更新picker默认值，value是要更新的值
 
 
 
-#### picker.showPicker(value);
+#### new Picker().showPicker(value);
 
 显示picker，有参数时定位到参数值位置再显示picker
 
 
 
-#### picker.getCurValue();
+#### new Picker().getCurValue();
 
 获取当前选中结果的值
 
 
 
-### wheels数据结构
+#### new Picker().distory();
+
+销毁picker，注意这里仅对主要事件侦听器以及创建picker时生成的html节点的移除，外部对象请自行销毁，比如
+
+```javascript
+var newPicker = new Picker({...});
+newPicker.distory();
+newPicker = null; // 完全销毁生成的picker对象
+```
+
+
+
+### <span id="wheelstag">wheels数据结构</span>
 
 - **基础数据结构**
 
@@ -162,7 +179,7 @@ datePicker.showPicker(['周二', '10：00']);
 
   
 
-### style附表
+### <span id="styletag">style附表</span>
 
 > 用于定义Picker的样式，这里以行内样式覆写Picker的默认样式，每个属性名对应一个node节点；属性名的值应该是一个style Object，Object的key建议使用javascript 的style属性，比如 { backgroundColor: "red" , zIndex: 100 }，这样Picker内部的生成程序可以更好的补全浏览器厂商前缀，当然如果样式属性浏览器支持很好的话，你也完全可以写成 { "background-color": "red" , "z-index": 100 }
 
