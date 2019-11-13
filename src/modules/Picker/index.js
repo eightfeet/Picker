@@ -11,7 +11,7 @@ class Picker {
 
 		this.id = config.id || `Picker${stamp}-${window.Math.floor(window.Math.random()*100)}`;
 		this.titleText = title || '';
-		this.mobileSelect;
+		this.picker;
 		this.wheelsData = wheels;
 		this.cancelBtnText = cancelBtnText || '取消';
 		this.confirmBtnText = confirmBtnText || '确定';
@@ -83,7 +83,7 @@ class Picker {
 
 	initActivated = () => {
 		const positions = this.getIndexArr();
-		const wheels = this.mobileSelect.getElementsByClassName(s.selectContainer);
+		const wheels = this.picker.getElementsByClassName(s.selectContainer);
 
 		if (positions && positions.length === 0) {
 			return;
@@ -116,7 +116,7 @@ class Picker {
 
 	show = () => {
 		this.initActivated();
-		this.mobileSelect.children[0].classList.add(s['mobileSelect-show']);
+		this.picker.children[0].classList.add(s['mobileSelect-show']);
 
 		
 		if (typeof this.onShow === 'function') {
@@ -125,7 +125,7 @@ class Picker {
 	};
 
 	hide = () => {
-		this.mobileSelect.children[0].classList.remove(s['mobileSelect-show']);
+		this.picker.children[0].classList.remove(s['mobileSelect-show']);
 		if (typeof this.onHide === 'function') {
 			this.onHide(this);
 		}
@@ -146,16 +146,16 @@ class Picker {
 			config.parentId,
 			config.emBase
 		).then(() => {
-			this.mobileSelect = document.getElementById(this.id);
-			this.wheel = this.mobileSelect.getElementsByClassName(s.wheel);
-			this.slider = this.mobileSelect.getElementsByClassName(s.selectContainer);
-			this.wheels = this.mobileSelect.querySelector(`.${s.wheels}`);
-			this.liHeight = this.mobileSelect.querySelector('li').offsetHeight;
-			this.ensureBtn = this.mobileSelect.querySelector(`.${s.confirm}`);
-			this.cancelBtn = this.mobileSelect.querySelector(`.${s.cancel}`);
-			this.grayLayer = this.mobileSelect.querySelector(`.${s.grayLayer}`);
-			this.popUp = this.mobileSelect.querySelector(`.${s.content}`);
-			this.panel = this.mobileSelect.querySelector(`.${s.panel}`);
+			this.picker = document.getElementById(this.id);
+			this.wheel = this.picker.getElementsByClassName(s.wheel);
+			this.slider = this.picker.getElementsByClassName(s.selectContainer);
+			this.wheels = this.picker.querySelector(`.${s.wheels}`);
+			this.liHeight = this.picker.querySelector('li').offsetHeight;
+			this.ensureBtn = this.picker.querySelector(`.${s.confirm}`);
+			this.cancelBtn = this.picker.querySelector(`.${s.cancel}`);
+			this.grayLayer = this.picker.querySelector(`.${s.grayLayer}`);
+			this.popUp = this.picker.querySelector(`.${s.content}`);
+			this.panel = this.picker.querySelector(`.${s.panel}`);
 
 			this.wheelnode = this.panel.querySelector(`.${s.wheel}`);
 			this.wheelsnode = this.panel.querySelector(`.${s.wheels}`);
@@ -163,9 +163,9 @@ class Picker {
 			this.wheelnode && (this.wheelnode.style.height = `${this.liHeight * 5}px`);
 			this.wheelsnode && (this.wheelsnode.style.height = `${this.liHeight * 5}px`);
 
-			this.shadowMask =  this.mobileSelect.querySelector(`.${s.shadowMask}`);
+			this.shadowMask =  this.picker.querySelector(`.${s.shadowMask}`);
 			this.shadowMask.style.height = `${this.panel.offsetHeight}px`;
-			this.selectLine = this.mobileSelect.querySelector(`.${s.selectLine}`);
+			this.selectLine = this.picker.querySelector(`.${s.selectLine}`);
 			this.selectLine.style.height = `${this.liHeight}px`;
 			this.selectLine.style.top = `${this.panel.offsetHeight/2 - this.liHeight/2}px`;
 			
@@ -198,37 +198,56 @@ class Picker {
 			this.setCurDistance(this.initPosition);
 
 			//按钮监听
-			this.cancelBtn.addEventListener('click', () => {
-				this.hide();
-				this.onCancel(this.curValue);
-			});
-
-			this.ensureBtn.addEventListener('click', () => {
-				this.hide();
-				if (!this.liHeight) {
-					this.liHeight = this.mobileSelect.querySelector('li').offsetHeight;
-				}
-
-				this.curIndexArr = this.getIndexArr();
-				this.curValue = this.getCurValue();
-				this.onConfirm(this.curValue);
-			});
-
-			this.trigger.addEventListener('click', () => {
-				this.show();
-			});
-			this.grayLayer.addEventListener('click', () => {
-				this.hide();
-				this.onCancel(this.curValue);
-			});
-			this.popUp.addEventListener('click', () => {
-				event.stopPropagation();
-			});
+			this.cancelBtn.addEventListener('click', this.cancelBtnEnv, false);
+			this.ensureBtn.addEventListener('click', this.ensureBtnEnv, false);
+			this.trigger.addEventListener('click', this.triggerEnv, false);
+			this.grayLayer.addEventListener('click', this.grayLayerEnv,  false);
+			this.popUp.addEventListener('click', this.popUpEnv,  false);
 
 			this.fixRowStyle(); //修正列数
 			this.isInit = true;
 		});
 	};
+
+	cancelBtnEnv = () => {
+		this.hide();
+		this.onCancel(this.curValue);
+	}
+
+	ensureBtnEnv = () => {
+		this.hide();
+		if (!this.liHeight) {
+			this.liHeight = this.picker.querySelector('li').offsetHeight;
+		}
+
+		this.curIndexArr = this.getIndexArr();
+		this.curValue = this.getCurValue();
+		this.onConfirm(this.curValue);
+	}
+
+	triggerEnv = () => {
+		this.show();
+	};
+
+	grayLayerEnv = () => {
+		this.hide();
+		this.onCancel(this.curValue);
+	};
+
+	popUpEnv = () => {
+		event.stopPropagation();
+	}
+
+	destroy = () => {
+		console.warn('Remove event listeners and remove nodes;');
+		this.cancelBtn.removeEventListener('click', this.cancelBtnEnv, false);
+		this.ensureBtn.removeEventListener('click', this.ensureBtnEnv, false);
+		this.trigger.removeEventListener('click', this.triggerEnv, false);
+		this.grayLayer.removeEventListener('click', this.grayLayerEnv,  false);
+		this.popUp.removeEventListener('click', this.popUpEnv,  false);
+		
+		this.picker.parentNode.removeChild(this.picker);
+	}
 
 	addListenerAll = () => {
 		for (let i = 0; i < this.slider.length; i++) {
@@ -464,7 +483,7 @@ class Picker {
 		}
 
 		
-		const wheelsnode = this.mobileSelect.getElementsByTagName('ul');
+		const wheelsnode = this.picker.getElementsByTagName('ul');
 		const promiseArr = [];
 
 		for (let i = 0; i < wheelsnode.length; i++) {
@@ -681,7 +700,7 @@ class Picker {
 				if (this.cascade) {
 					this.checkRange(index, this.getIndexArr());
 				} else {
-					const element = this.mobileSelect.getElementsByClassName(s.selectContainer)[index];
+					const element = this.picker.getElementsByClassName(s.selectContainer)[index];
 					onceElementTransitionEnd(element)
 						.then(() => {
 							this.updateActivated(element.children, index);
@@ -767,7 +786,7 @@ class Picker {
 				if (this.cascade) {
 					this.checkRange(index, this.getIndexArr());
 				} else {
-					const element = this.mobileSelect.getElementsByClassName(s.selectContainer)[index];
+					const element = this.picker.getElementsByClassName(s.selectContainer)[index];
 					onceElementTransitionEnd(element)
 						.then(() => {
 							this.updateActivated(element.children, index);
