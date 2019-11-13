@@ -200,3 +200,5 @@ newPicker = null; // 完全销毁生成的picker对象
 > 轮子的样式 class=\`${Picker.id}_wheel\`
 >
 > 轮子被选中项的样式 class=\`${Picker.id}_activated\`
+
+特别感谢onlyhom的<a href="https://github.com/onlyhom/mobileSelect.js">MobileSelect</a>项目，从中借鉴了核心事件与算法。
