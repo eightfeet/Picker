@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>react</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="./picker.js"></script>
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        class PickerButton extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {
+                    result: '请选择',
+                    picker: {}
+                };
+            }
+
+            componentDidMount(){
+                this.setState({
+                    picker: new window.___Picker___({
+                        id: 'picker',
+                        wheels: [
+                            { data: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'] },
+                            { data: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00'] }
+                        ],
+                        trigger: '#pickerSelect',
+                        onConfirm: (data) => {
+                            this.updatePicker(data)
+                        },
+                        title: 'demo'
+                    })
+                });
+            }
+
+            updatePicker = (data) => {
+                this.setState({
+                    result: data.join(' ')
+                });
+            }
+
+            render() {
+                return <button id="pickerSelect">{this.state.result}</button>;
+            }
+        }
+
+        ReactDOM.render(
+            <PickerButton />,
+            document.getElementById('root')
+        );
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+</body>
+
+</html>
