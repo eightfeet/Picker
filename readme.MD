@@ -33,7 +33,7 @@ datePicker.showPicker(['周二', '10：00']);
 
 | 参数          | 类型     | 说明                                                         | 是否必填 |
 | ------------- | -------- | ------------------------------------------------------------ | -------- |
-| id            | String   | 模块ID，模块根节点将以此为id，部分子节点将添加class=“id_功能名” 作为className用于覆写样式（能通过style参数设置样式的尽量不要通过className去覆写），默认id=MobileSelect_时间戳_100位随机数 | 否       |
+| id            | String   | 模块ID，模块根节点将以此为id，部分子节点将添加class=“id\_功能名” 作为className用于覆写样式（能通过style参数设置样式的尽量不要通过className去覆写），默认id=MobileSelect_时间戳_100位随机数 | 否       |
 | parentId      | String   | 模块挂载的父节点，                                           | 否       |
 | emBase        | Number   | 基础字体大小，模块采用em为单位制，子节点元素单位em的参考值，比如｛emBase:20｝则相当于1em=20px | 否       |
 | trigger       | String   | 引用picker页面的目标触发node，用于点击以唤起picker           | 必填     |
@@ -53,21 +53,33 @@ datePicker.showPicker(['周二', '10：00']);
 
 ### options
 
-#### picker.updatePicker(value)
+#### new Picker().updatePicker(value)
 
 用于更新picker默认值，value是要更新的值
 
 
 
-#### picker.showPicker(value);
+#### new Picker().showPicker(value);
 
 显示picker，有参数时定位到参数值位置再显示picker
 
 
 
-#### picker.getCurValue();
+#### new Picker().getCurValue();
 
 获取当前选中结果的值
+
+
+
+#### new Picker().distory();
+
+销毁picker，注意这里仅对主要事件侦听器以及创建picker时生成的html节点的移除，外部对象请自行销毁，比如
+
+```javascript
+var newPicker = new Picker({...});
+newPicker.distory();
+newPicker = null; // 完全销毁生成的picker对象
+```
 
 
 
