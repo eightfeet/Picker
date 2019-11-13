@@ -25,6 +25,8 @@ const datePicker = new MobileSelect({
 datePicker.showPicker(['周二', '10：00']);
 ```
 
+[在React中使用](http://www.eightfeet.cn/Picker/src/example/react.html)，[在Vue中使用](http://www.eightfeet.cn/Picker/src/example/vue.html)
+
 
 
 ### parame
