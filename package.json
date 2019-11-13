@@ -13,7 +13,9 @@
     "test": "jest --watchAll"
   },
   "keywords": [
-    "modal"
+    "Picker",
+    "MobilePicker",
+    "MobileSelecter"
   ],
   "author": "eightfeet",
   "license": "MIT",
