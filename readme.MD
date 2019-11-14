@@ -57,13 +57,36 @@ datePicker.showPicker(['周二', '10：00']);
 
 #### new Picker().updatePicker(value)
 
-用于更新picker默认值，value是要更新的值
+用于更新picker默认值，value是要更新的值，value是一个数组，每一项代表每列轮子的默认值。如果定义了keyMap请使用keyMap中valve对应定义的值；
+
+​		ex：假设picker的数据与keyMap定义如下	
+
+```javascript
+wheelsdata = [	
+    {
+        data:[
+            { val: 0, date: '周日' },
+            { val: 1, date: '周一' },
+        ],
+        data:[
+            { val: 8, date: '8：00' },
+            { val: 9, date: '9：00' },
+        ]
+    }
+]
+
+keyMap = {display: 'date', value: 'val'}
+```
+
+​		value值应当是每列的data[keyMap.value]组成的数组。
+
+**比如我们要updatePicker默认值到周日的9：00，那么value值应该是    **```value = [0,9]```
 
 
 
 #### new Picker().showPicker(value);
 
-显示picker，有参数时定位到参数值位置再显示picker
+显示picker，有参数时定位到参数值位置再显示picker, 参数value值同updatePicker的参数值
 
 
 

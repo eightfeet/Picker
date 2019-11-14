@@ -13,9 +13,16 @@
     "test": "jest --watchAll"
   },
   "keywords": [
-    "Picker",
-    "MobilePicker",
-    "MobileSelecter"
+    "picker",
+    "date-picker",
+    "address-picker",
+    "react-picker",
+    "vue-picker",
+    "pickerview",
+    "optionspicker",
+    "react-select",
+    "vue-select",
+    "mobile-selector"
   ],
   "author": "eightfeet",
   "license": "MIT",
