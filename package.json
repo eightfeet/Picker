@@ -1,6 +1,6 @@
 {
   "name": "@eightfeet/picker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "./dist/picker.js",
   "files": [
@@ -12,7 +12,9 @@
     "prepublish": "rm -rf ./dist && yarn build",
     "test": "jest --watchAll"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "keywords": [
     "picker",
     "date-picker",
