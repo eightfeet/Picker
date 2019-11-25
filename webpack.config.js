@@ -116,7 +116,7 @@ module.exports = () => ({
 		contentBase: path.join(__dirname, 'src'),
 		compress: true,
 		port: 9000,
-		host: 'localhost',
+		host: '192.168.114.205', // 'localhost',
 		publicPath: '/',
 		historyApiFallback: true
 	}

@@ -165,7 +165,7 @@
 
     function handleResult(data, element, key, defaultText) {
         var result = [];
-        for (let index = 0; index < data.length; index++) {
+        for (var index = 0; index < data.length; index++) {
             const item = data[index];
             if (item && typeof item === 'object') {
                 result.push(item[key])
@@ -217,7 +217,7 @@
 
     function getDaysInOneMonth(year, month) {
         month = parseInt(month, 10);
-        let d = new Date(year, month, 0);
+        var d = new Date(year, month, 0);
         return d.getDate();
     }
 
@@ -225,15 +225,15 @@
         const data = [];
         const M = {};
         M.data = [];
-        for (let yi = 1; yi < 13; yi++) {
-            const temp = { date: `${yi}月`, val: yi, childs: [] };
+        for (var yi = 1; yi < 13; yi++) {
+            const temp = { date: yi+'月', val: yi, childs: [] };
             const days = getDaysInOneMonth(year, yi);
-            for (let di = 1; di <= days; di++) {
-                const mdays = { date: `${di}日`, val: di, childs: [] };
-                for (let hi = 0; hi < 24; hi++) {
-                    const hdata = { date: `${hi}时`, val: hi, childs: [] };
-                    for (let mi = 0; mi < 12; mi++) {
-                        hdata.childs.push({ date: `${mi * 5}分`, val: (mi * 5) });
+            for (var di = 1; di <= days; di++) {
+                const mdays = { date: di+'日', val: di, childs: [] };
+                for (var hi = 0; hi < 24; hi++) {
+                    const hdata = { date: hi+'时', val: hi, childs: [] };
+                    for (var mi = 0; mi < 12; mi++) {
+                        hdata.childs.push({ date: mi+'分', val: (mi * 5) });
                     }
                     mdays.childs.push(hdata);
                 }

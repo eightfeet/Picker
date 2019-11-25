@@ -1,6 +1,6 @@
 import s from './Picker.scss';
 import { createDom, isPC } from '~/utils/htmlFactory';
-import { inlineStyle, onceElementTransitionEnd, dormancyFor, getPositionByDefaultValue } from '~/utils/tools';
+import { onceElementTransitionEnd, dormancyFor, getPositionByDefaultValue } from '~/utils/tools';
 import template from './template';
 
 
@@ -78,7 +78,6 @@ class Picker {
 
 		// 创建轮子
 		this.creatWheels(config);
-			
 	};
 
 	initActivated = () => {
@@ -596,8 +595,8 @@ class Picker {
 	};
 
 	movePosition = (theSlider, distance) => {
-		
-		theSlider.style = inlineStyle({transform: `translate3d(0, ${distance}px, 0)`});
+		theSlider.style.transform = `translate3d(0, ${distance}px, 0)`;
+		theSlider.style.webkitTransform = `translate3d(0, ${distance}px, 0)`;
 	};
 
 	locatePosition = (index, posIndex) => {

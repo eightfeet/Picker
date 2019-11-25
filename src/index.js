@@ -6,4 +6,5 @@ Number.parseInt = Number.parseInt || parseInt;
 Number.isFinite = Number.isFinite || function(value) {
 	return typeof value === 'number' && isFinite(value);
 };
+
 module.exports = require('./modules/Picker').default;
