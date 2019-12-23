@@ -127,7 +127,7 @@ newPicker = null; // 完全销毁生成的picker对象
 
   > 这类数据常用于显示信息与对应值分开展示的场景，root数组中每一个Object为一个滚动wheel列，data数组的每一项为当前wheel列的每一项；
   >
-  > 这里需要注意的是默认情况下Picker以name作为展示key，以value作为取值key，如果您的当前数据对象没有这两个key或者需要指定数据时需要通过keyMap来通知Picker当前数据哪个key是用于显示的, 比如下面数据就需要指定```keyMap = { name: 'date', value: 'val'}```
+  > 这里需要注意的是默认情况下Picker以name作为展示key，以value作为取值key，如果您的当前数据对象没有这两个key或者需要指定数据时需要通过keyMap来通知Picker当前数据哪个key是用于显示的, 比如下面数据就需要指定```keyMap = { display: 'date', value: 'val'}```
 
   ```javascript
   [
@@ -162,7 +162,7 @@ newPicker = null; // 完全销毁生成的picker对象
 
   > 联动数据常用于父子关系数据的展示，他的显示信息与对应值也是分开展示的场景，数据中的每一个层级关系代表列一个wheel列，平级数组的每一个对象为当前wheel列的每一项，依次到最后一个子集。wheels子集嵌套越深，Picker的列数也就越多
   >
-  > 这里需要注意的是同 “{ key: value } 数据” 结构一样需要通过keyMap来通知Picker当前数据哪个key是用于显示的, 比如下面数据就需要指定```keyMap = { name: 'date', value: 'val', childs: 'childs'}```
+  > 这里需要注意的是同 “{ key: value } 数据” 结构一样需要通过keyMap来通知Picker当前数据哪个key是用于显示的, 比如下面数据就需要指定```keyMap = { display: 'date', value: 'val', childs: 'childs'}```
 
   ```javascript
   [
