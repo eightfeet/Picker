@@ -239,14 +239,13 @@ class Picker {
 
 	destroy = () => {
 		console.warn('Remove event listeners and remove nodes;');
-		if (!this.picker.parentNode) return;
+		if (!this.picker) return;
 		this.cancelBtn.removeEventListener('click', this.cancelBtnEnv, false);
 		this.ensureBtn.removeEventListener('click', this.ensureBtnEnv, false);
 		if (!this.trigger) this.trigger.removeEventListener('click', this.triggerEnv, false);
 		this.grayLayer.removeEventListener('click', this.grayLayerEnv,  false);
 		this.popUp.removeEventListener('click', this.popUpEnv,  false);
-		
-		this.picker.parentNode.removeChild(this.picker);
+		if (!this.picker.parentNode) this.picker.parentNode.removeChild(this.picker);
 	}
 
 	addListenerAll = () => {
