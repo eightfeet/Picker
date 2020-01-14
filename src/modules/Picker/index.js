@@ -239,9 +239,10 @@ class Picker {
 
 	destroy = () => {
 		console.warn('Remove event listeners and remove nodes;');
+		if (!this.picker.parentNode) return;
 		this.cancelBtn.removeEventListener('click', this.cancelBtnEnv, false);
 		this.ensureBtn.removeEventListener('click', this.ensureBtnEnv, false);
-		this.trigger.removeEventListener('click', this.triggerEnv, false);
+		if (!this.trigger) this.trigger.removeEventListener('click', this.triggerEnv, false);
 		this.grayLayer.removeEventListener('click', this.grayLayerEnv,  false);
 		this.popUp.removeEventListener('click', this.popUpEnv,  false);
 		
