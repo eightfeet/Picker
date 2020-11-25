@@ -3,6 +3,7 @@
   "version": "1.0.7",
   "description": "",
   "main": "./dist/picker.js",
+  "types": "./dist/picker.d.ts",
   "files": [
     "dist"
   ],
