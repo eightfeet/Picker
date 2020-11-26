@@ -67,39 +67,39 @@ declare module '@eightfeet/picker' {
             /**
              * 覆盖层
              */
-            overlay?: any;
+            overlay?: {[kesy: string]: any};
             /**
              * 外框
              */
-            wrap?: any;
+            wrap?: {[kesy: string]: any};
             /**
              * 标题栏
              */
-            headlines?: any;
+            headlines?: {[kesy: string]: any};
             /**
              * 标题
              */
-            title?: any;
+            title?: {[kesy: string]: any};
             /**
              * 取消
              */
-            cancel?: any;
+            cancel?: {[kesy: string]: any};
             /**
              * 确定
              */
-            confirm?: any;
+            confirm?: {[kesy: string]: any};
             /**
              * 轮子面板
              */
-            panel?: any;
+            panel?: {[kesy: string]: any};
             /**
              * 选择线
              */
-            selectline?: any;
+            selectline?: {[kesy: string]: any};
             /**
              * 轮子面板覆盖层
              */
-            mask?: any;
+            mask?: {[kesy: string]: any};
         };
         /**
          * 取消按钮文字
