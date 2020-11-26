@@ -36,7 +36,7 @@ declare module '@eightfeet/picker' {
          *         }}
          * @memberof Option
          */
-        wheels: Column<any>;
+        wheels: Wheels<any>;
         /**
          * 数据映射关系帮定wheel数据到picker
          *
@@ -171,7 +171,7 @@ declare module '@eightfeet/picker' {
         }[];
     }
 
-    interface KeyMap {
+    export interface KeyMap {
         /**
          * 用于显示的属性名
          * @type {string}
@@ -196,12 +196,32 @@ declare module '@eightfeet/picker' {
             [value in V]: any;
         } &
         {
-            [childs in C]: ColumnData<K, V, C>;
+            [childs in C]?: ColumnData<K, V, C>[];
         };
 
     interface Column<M extends KeyMap> {
         data: ColumnData<M['display'], M['value'], M['childs']>[];
     }
+
+    interface DefaultKeyMap  {
+              /**
+         * 用于显示的属性名
+         * @type {string}
+         */
+        display: 'display';
+        /**
+         * 用于值的属性名
+         * @type {string}
+         */
+        value: 'value';
+        /**
+         * 用于二级数据的属性名
+         * @type {string}
+         */
+        childs: 'childs';
+    }
+
+    export type Wheels<M extends KeyMap = DefaultKeyMap> = Column<M>[]
 
     class Picker {
         constructor(option: Option);
