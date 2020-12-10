@@ -245,7 +245,7 @@ class Picker {
 		if (!this.trigger) this.trigger.removeEventListener('click', this.triggerEnv, false);
 		this.grayLayer.removeEventListener('click', this.grayLayerEnv,  false);
 		this.popUp.removeEventListener('click', this.popUpEnv,  false);
-		if (!this.picker.parentNode) this.picker.parentNode.removeChild(this.picker);
+		if (this.picker.parentNode) this.picker.parentNode.removeChild(this.picker);
 	}
 
 	addListenerAll = () => {

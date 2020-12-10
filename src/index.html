@@ -258,6 +258,7 @@
         cancelBtnText: 'cancel',
         confirmBtnText: 'ensure',
         onConfirm: function (data) {
+            console.log(data);
             handleResult(data, '#picker', null, 'normal')
         },
         onCancel: function (data) {
@@ -346,8 +347,6 @@
             }
         }
     });
-
-    console.log('msData', JSON.stringify(msData, null, 2));
 
     window.cascadeSelect = new Picker({
         id: 'cascadeSelect',
