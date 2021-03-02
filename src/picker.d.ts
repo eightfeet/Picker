@@ -1,5 +1,5 @@
 declare module '@eightfeet/picker' {
-    export interface Option<M extends KeyMap> {
+    export interface Option<M extends KeyMap = DefaultKeyMap> {
         /**
          * 模块ID，模块根节点将以此为id，部分子节点将添加class=“id_功能名” 作为className用于覆写样式（能通过style参数设置样式的尽量不要通过className去覆写），默认id=MobileSelect_时间戳_100位随机数
          * @type {string}
@@ -154,22 +154,6 @@ declare module '@eightfeet/picker' {
     export interface wheelsBaseType {
         data: string[];
     }
-    /**
-     * 键值数据类型
-     * @interface wheelsKeyValueType
-     */
-    export interface wheelsKeyValueType {
-        data: { [keys: string]: any }[];
-    }
-    /**
-     * 联动数据类型
-     * @interface wheelsInterrelatedType
-     */
-    export interface wheelsInterrelatedType {
-        data: {
-            [keys: string]: wheelsInterrelatedType[] | any;
-        }[];
-    }
 
     export interface KeyMap {
         /**
@@ -221,7 +205,10 @@ declare module '@eightfeet/picker' {
         childs: 'childs';
     }
 
-    export type Wheels<M extends KeyMap = DefaultKeyMap> = Column<M>[]
+    /**
+     * wheels 数据类型，[{ data:[ {Key: Value}, ... ]}, ...] 或 [{ data:[ String, ... ]}, ...]
+     */
+    export type Wheels<M extends KeyMap = DefaultKeyMap> = Column<M>[] | wheelsBaseType[];
 
     class Picker {
         constructor(option: Option<any>);

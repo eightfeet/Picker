@@ -62,15 +62,27 @@ datePicker.showPicker(['周二', '10：00']);
 ​		ex：假设picker的数据与keyMap定义如下	
 
 ```javascript
-wheelsdata = [	
+wheelsdata = [
     {
-        data:[
+        data: [
             { val: 0, date: '周日' },
             { val: 1, date: '周一' },
-        ],
-        data:[
-            { val: 8, date: '8：00' },
-            { val: 9, date: '9：00' },
+            { val: 2, date: '周二' },
+            { val: 3, date: '周三' },
+            { val: 4, date: '周四' },
+            { val: 5, date: '周五' },
+            { val: 6, date: '周六' }
+        ]
+    },
+    {
+        data: [
+            { val: 8, date: '08:00' },
+            { val: 9, date: '09:00' },
+            { val: 10, date: '10:00' },
+            { val: 11, date: '11:00' },
+            { val: 12, date: '12:00' },
+            { val: 13, date: '13:00' },
+            { val: 14, date: '14:00' }
         ]
     }
 ]
@@ -116,7 +128,7 @@ newPicker = null; // 完全销毁生成的picker对象
 
   ```javascript
   [
-      {data:['周日','周一','周二','周三','周四','周五','周六']}     
+      {data:['周日','周一','周二','周三','周四','周五','周六']},     
       {data:['08:00','09:00','10:00','11:00','12:00','13:00','14:00']}
   ]
   ```
@@ -224,4 +236,3 @@ newPicker = null; // 完全销毁生成的picker对象
 >
 > 轮子被选中项的样式 class=\`${Picker.id}_activated\`
 
-特别感谢onlyhom的<a href="https://github.com/onlyhom/mobileSelect.js">MobileSelect</a>项目，从中借鉴了核心事件与算法。
