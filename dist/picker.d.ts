@@ -117,17 +117,17 @@ declare module '@eightfeet/picker' {
          * 点击确认时的回调，以参数形式返回被选中的结果
          * @memberof Option
          */
-        onConfirm?: (value: Value) => void;
+        onConfirm?: (value: CBValue) => void;
         /**
          * 点击取消或者遮罩层时的回调，以参数形式返回上次选中的结果
          * @memberof Option
          */
-        onCancel?: (value: Value) => void;
+        onCancel?: (value: CBValue) => void;
         /**
          * 滚动结束时的回调，以参数形式返回被选中的结果
          * @memberof Option
          */
-        transitionEnd?: (value: Value) => void;
+        transitionEnd?: (value: CBValue) => void;
         /**
          * 显示picker时的回调，返回当前picker实例
          * @memberof Option
@@ -142,10 +142,10 @@ declare module '@eightfeet/picker' {
          * 改变选择时的回调，以参数形式返回被选中的结果
          * @memberof Option
          */
-        onChange?: (value: Value) => void;
+        onChange?: (value: CBValue) => void;
     }
 
-    export type Value = {[keys: string]: any }[];
+    export type CBValue = {[keys: string]: any }[];
 
     /**
      * 基础数据结构
