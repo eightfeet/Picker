@@ -1,6 +1,6 @@
 {
   "name": "@eightfeet/picker",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "./dist/picker.js",
   "types": "./dist/picker.d.ts",
