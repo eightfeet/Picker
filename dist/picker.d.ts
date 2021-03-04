@@ -227,10 +227,10 @@ declare module '@eightfeet/picker' {
         /**
          * 销毁picker，注意这里仅对主要事件侦听器以及创建picker时生成的html节点的移除，外部对象请自行销毁，比如
          * var newPicker = new Picker({...});
-         * newPicker.distory();
+         * newPicker.destroy();
          * newPicker = null; // 完全销毁生成的picker对象
          */
-        public distory: () => {};
+        public destroy: () => {};
     }
 
     export default Picker;
