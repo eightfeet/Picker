@@ -27,6 +27,8 @@ const datePicker = new Picker({
 datePicker.showPicker(['周二', '10：00']);
 ```
 
+[react Picker组件实践](http://www.eightfeet.cn/Picker/src/example/Picker.tsx)
+
 [在React中使用](http://www.eightfeet.cn/Picker/src/example/react.html)，[在Vue中使用](http://www.eightfeet.cn/Picker/src/example/vue.html)
 
 
